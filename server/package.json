@@ -1,0 +1,25 @@
+{
+  "name": "movie_pod",
+  "version": "1.0.0",
+  "description": "track movies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kayirpal/MoviePod.git"
+  },
+  "keywords": [
+    "Movie"
+  ],
+  "author": "Kirpal Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kayirpal/MoviePod/issues"
+  },
+  "homepage": "https://github.com/kayirpal/MoviePod#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
