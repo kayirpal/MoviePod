@@ -2,5 +2,5 @@
     "use strict";
     
     // define partials module
-    angular.module("partials.module",[]);
+    angular.module("dashboard.module",[]);
 }());

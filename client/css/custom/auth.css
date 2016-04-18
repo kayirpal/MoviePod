@@ -1,0 +1,17 @@
+.loginForm .input-group-addon {
+    min-width: 45px;
+    font-size: 20px;
+}
+.viewHeader {
+    margin: 15px 25px;
+    font-size: large;
+}
+
+.forgotPassword{
+    color: rgb(166, 199, 222);
+    cursor: pointer;
+    line-height: 30px;
+}
+.forgotPassword:hover {
+    color: #CEDC58;
+}

@@ -13,15 +13,18 @@
     <!--Custom CSS-->
     <link href="css/custom/index.css" rel="stylesheet" />
     <link href="css/custom/common.css" rel="stylesheet" />
+    <link href="css/custom/auth.css" rel="stylesheet" />
+    <link href="css/custom/dashboard.css" rel="stylesheet" />
 
     <!--libraries-->
     <script src="scripts/angular.js"></script>
+    <script src="scripts/AngularUI/ui-router.js"></script>
 
 </head>
 <body ng-app="app" ng-controller="AppController as root">
 
     <!-- App entry point-->
-    <div class="appWrapper"></div>
+    <div class="appWrapper" ui-view></div>
 
 
     <!-- Libraries-->
@@ -36,13 +39,22 @@
 
     <!--Directives-->
     <script src="app/directives/directives.module.js"></script>
-
-    <!--App Modules-->
-    <script src="app/partials/partials.module.js"></script>
+    <script src="app/directives/star.ratings.js"></script>
+    
+    <!--auth Modules-->
+    <script src="app/partials/auth/auth.module.js"></script>    
+    <script src="app/partials/auth/login.js"></script>
+    <script src="app/partials/auth/register.js"></script>
+    
+    
+    <!--Dashboard module-->
+    <script src="app/partials/dashboard/dashboard.module.js"></script>
+    <script src="app/partials/dashboard/dashboard.js"></script>
 
 
     <!--Root module-->
     <script src="app/app.module.js"></script>
+    <script src="app/app.settings.js"></script>
     <script src="app/app.js"></script>
 
 </body>

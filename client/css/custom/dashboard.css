@@ -1,0 +1,53 @@
+.filterContainer {
+    display: inline-block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.filter {
+    float: left;
+    width: 20%;
+    margin: 0 5px;
+    line-height: 30px;
+}
+
+.searchFilter{
+    width: 50%;
+}
+
+.movieContainer {
+    padding: 0 30px;
+    margin: 15px 0;
+}
+.moviePosterWrapper {
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+}
+
+.movieInfoContainer {
+    float: left;
+    padding-left: 30px;
+    max-width: 50%;
+    margin: 0;
+}
+.movieInfo {
+    margin-bottom: 1em;
+}
+
+.movieInfo .title{
+    font-size: 16px;
+    color: #D6C92C;
+}
+.movieInfo .info {
+    color: #D4B7B9;
+}
+
+.usersMovieInfo {
+    text-align: right;
+    padding: 10px 0;
+}
+.star{
+    float: right;
+    cursor: pointer;
+}

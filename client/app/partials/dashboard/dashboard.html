@@ -1,0 +1,105 @@
+<section class="viewWrapper">
+    <header class="viewHeader filterWrapper">
+        <ul class="filterContainer">
+            <li class="filter searchFilter input-group">
+                <input type="search" class="form-control" placeholder="Search for title">
+                <div class="input-group-addon">
+                    <span class="fa fa-search"></span>
+                </div>
+
+            </li>
+            <li class="filter typeFilter">
+                <select class="form-control">
+                    <option value="movie">Movie</option>
+                    <option value="series">Series</option>
+                    <option value="episode">Episode</option>
+                </select>
+            </li>
+            <li class="filter releaseYearFilter">
+                <input type="search" class="form-control" placeholder="Year of release">
+            </li>
+        </ul>
+    </header>
+    <div class="viewContainer gridContainer">
+
+        <div ng-if="!dashboard.curMovie" class="searchForMovie center fa-2x">
+            Search for a movie
+        </div>
+
+        <div class="searchedMovieWrapper" ng-repeat="movie in [dashboard.curMovie]">
+
+            <article class="movieContainer">
+                <header class="movieHeader clear">
+                    <div class="movieTitle float-left">
+                        <h3>
+                       <span ng-bind="movie.Title"></span> 
+                       <span class="font-16" ng-bind-template="({{movie.Year}})"></span>
+                    </h3>
+                        <h4>
+                        <span ng-bind="movie.Genre"></span>
+                    </h4>
+                    </div>
+                    <div class="usersMovieInfo float-right">
+                        <p ng-if="movie.alreadySeen">
+                            <span class="fa fa-3x fa-eye-slash"></span>
+                        </p>
+                        <ul ng-if="!movie.alreadySeen">
+                            
+                            <li class="fa fa-3x fa-eye"></li>
+                            <li on-update="dashboard.updateRatings" star-rating score="3" max="5"></li>
+                        </p>
+                    </div>
+                </header>
+                <div class="movieInfoWrapper clear">
+                    <picture class="moviePosterWrapper">
+                        <img class="moviePoster" ng-src="{{movie.Poster}}" alt="{{movie.Title}}">
+                    </picture>
+                    <ul class="movieInfoContainer">
+                        <li class="movieInfo">
+                            <span class="title">Director: </span>
+                            <span class="info" ng-bind="movie.Director"></span>
+                        </li>
+                        <li class="movieInfo">
+                            <span class="title">Actors: </span>
+                            <span class="info" ng-bind="movie.Actors"></span>
+                        </li>
+                        <li class="movieInfo">
+                            <span class="title">Language: </span>
+                            <span class="info" ng-bind="movie.Language"></span>
+                        </li>
+                        <li class="movieInfo">
+                            <span class="title">Rated: </span>
+                            <span class="info" ng-bind="movie.Rated"></span>
+                        </li>
+                        <li class="movieInfo">
+                            <span class="title">Runtime: </span>
+                            <span class="info" ng-bind="movie.Runtime"></span>
+                        </li>
+                        <li class="movieInfo">
+                            <span class="title">Country: </span>
+                            <span class="info" ng-bind="movie.Country"></span>
+                        </li>
+                        <li class="movieInfo">
+                            <span class="title">Awards: </span>
+                            <span class="info" ng-bind="movie.Awards"></span>
+                        </li>
+                        <li class="movieInfo">
+                            <span class="title">IMDB Rating: </span>
+                            <span class="info" ng-bind="movie.imdbRating"></span>
+                        </li>
+                        <li class="movieInfo">
+                            <span class="title">Released: </span>
+                            <span class="info" ng-bind="movie.Released"></span>
+                        </li>
+                        <li class="movieInfo">
+                            <span class="title">Plot: </span>
+                            <span class="info" ng-bind="movie.Plot"></span>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+        </div>
+
+    </div>
+</section>
