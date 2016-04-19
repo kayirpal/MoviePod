@@ -3,30 +3,30 @@
         <span>Already have an account, </span>
         <a href="#/login" class="btn btn-info">Login now!</a>
     </header>
-    <div class="viewContainer loginContainer">
-        <form class="loginForm center" novalidate>
+    <div class="viewContainer loginContainer" ng-repeat="newUser in [register.newUser]">
+        <form class="loginForm center" ng-submit="register.createUser(newUser)" novalidate>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon">N</div>
-                    <input type="text" class="form-control" placeholder="Name">
+                    <input type="text" class="form-control" required ng-model="newUser.name" placeholder="Name">
                 </div>
             </div> 
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon">@</div>
-                    <input type="text" class="form-control" placeholder="Email">
+                    <input type="email" formnovalidate class="form-control" ng-class="{'ng-invalid-email': newUser.invalidEmail}" required ng-model="newUser.email" placeholder="Email">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon">$</div>
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" required ng-model="newUser.password" placeholder="Password">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon">$</div>
-                    <input type="password" class="form-control" placeholder="Confirmation">
+                    <input type="password" class="form-control" ng-class="{'ng-invalid-required': newUser.unmatchedPassword}" required ng-model="newUser.cPassword" placeholder="Confirmation">
                 </div>
             </div>
             <div class="text-center">

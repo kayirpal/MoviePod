@@ -15,3 +15,8 @@
 .forgotPassword:hover {
     color: #CEDC58;
 }
+.ng-submitted .ng-invalid-email,
+.ng-submitted .ng-invalid-required{
+    background-color: rgba(216, 71, 71, 0.88);
+    color: #F7F3F3;    
+}

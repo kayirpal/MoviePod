@@ -24,7 +24,10 @@
     box-sizing: border-box;
     border: 1px solid #aaa;
 }
-
+.movieInfoWrapper {
+    display: inline-block;
+    width: 100%;
+}
 .movieInfoContainer {
     float: left;
     padding-left: 30px;
@@ -51,3 +54,4 @@
     float: right;
     cursor: pointer;
 }
+

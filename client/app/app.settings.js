@@ -31,7 +31,7 @@
 
         // on route change start
         rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
-return;
+
             // not available to guest user
             if (toState.isPrivate && !rootScope.user) {
 

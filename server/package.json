@@ -2,7 +2,7 @@
   "name": "movie_pod",
   "version": "1.0.0",
   "description": "track movies",
-  "main": "index.js",
+  "main": "app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/kayirpal/MoviePod#readme",
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
     "express": "^4.13.4",
     "mongoose": "^4.4.12"
   }

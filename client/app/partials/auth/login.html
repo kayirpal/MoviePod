@@ -3,25 +3,24 @@
         <span>Haven't signed up yet, </span>
         <a href="#/register" class="btn btn-info">Join now!</a>
     </header>
-    <div class="viewContainer loginContainer">
-        <form class="loginForm center" novalidate>
+    <div class="viewContainer loginContainer" ng-repeat="user in [login.user]">
+        <form class="loginForm center" novalidate   ng-submit="login.authorize(user)">
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon">@</div>
-                    <input type="text" class="form-control" placeholder="Email">
+                    <input type="text" class="form-control" ng-class="{'ng-invalid-email': user.invalidEmail}" required ng-model="user.email" placeholder="Email">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon">$</div>
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" required ng-model="user.password" placeholder="Password">
                 </div>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-success float-right">Let me in!</button>
                 <span class="forgotPassword float-left">Sorry, I forgot my password</span>
             </div>
-
         </form>
     </div>
 </section>
