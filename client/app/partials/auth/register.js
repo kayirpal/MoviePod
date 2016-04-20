@@ -11,41 +11,59 @@
         // create user
         register.createUser = function (newUser) {
 
-            // chech basic 
-            // name
-            if (validate.isNonEmptyString(newUser.name) &&
+            // reset validation message
+            register.message = undefined;
 
-                // password
-                validate.isNonEmptyString(newUser.password) &&
+            // check name
+            if (!validate.isNonEmptyString(newUser.name)) {
 
-                // email
-                validate.isValidEmail(newUser.email, newUser)) {
+                register.message = "We need to know your name";
+                return;
+            }
 
-                // confirm password
-                if (newUser.cPassword !== newUser.password) {
-                    newUser.unmatchedPassword = true;
-                    return;
+            // check email
+            if (!validate.isValidEmail(newUser.email, newUser)) {
+
+                register.message = "Provided email is invalid";
+                return;
+            }
+
+            // check email
+            if (!validate.isNonEmptyString(newUser.password)) {
+
+                register.message = "You must set a password";
+                return;
+            }
+
+            // confirm password
+            if (newUser.cPassword !== newUser.password) {
+                newUser.unmatchedPassword = true;                
+                register.message = "Password not confirmed";
+                return;
+            }
+
+            // all good, add user
+            auth.createUser(newUser).then(function (addedUser) {
+
+                // if user signed up successfully
+                if (!!addedUser && !!addedUser._id) {
+
+                    // update current user in root scope
+                    rootScope.curUser = addedUser;
+
+                    // save in session storage
+                    auth.startSession(addedUser);
+
+                    // navigate to dashboard
+                    state.go("dashboard");
                 }
 
-                // all good, add user
-                auth.createUser(newUser).then(function (addedUser) {
+            }, function (error) {
+                if (error.message && error.message.search("duplicate key error")) {
+                    alert("Email already used, please try another one");
+                }
+            });
 
-                    // if user signed up successfully
-                    if (!!addedUser && !!addedUser._id) {
-
-                        // update current user in root scope
-                        rootScope.curUser = addedUser;
-
-                        // navigate to dashboard
-                        state.go("dashboard");
-                    }
-
-                }, function (error) {
-                    if (error.message && error.message.search("duplicate key error")) {
-                        alert("Email already used, please try another one");
-                    }
-                });
-            }
         };
     }
 

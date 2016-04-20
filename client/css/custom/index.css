@@ -579,3 +579,28 @@ ul, ol {
     font-size: 1.75em;
     text-shadow: black 0 0 10px;
 }
+
+.showUserActions {
+    position: fixed;
+    cursor: pointer;
+    z-index: 2;
+    right: 0;
+    top: 0;
+    width: 4em;
+    height: 4em;
+    text-align: right;
+    padding: 0.5em;
+    transition: all 0.5s ease;
+    border-bottom-left-radius: 4em;
+    background-color: #6B6464;
+}
+.showUserActions:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: rgba(0, 0, 0, 0.92);
+}
+
+.unauthorizedUser .showUserActions{
+    right: -4em;
+    top: -4em;
+    pointer-events: none;
+}

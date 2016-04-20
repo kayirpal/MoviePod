@@ -19,7 +19,7 @@
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-success float-right">Let me in!</button>
-                <span class="forgotPassword float-left">Sorry, I forgot my password</span>
+                <span class="forgotPassword float-left" ng-bind="user.message || 'Hi, we will wait for you'"></span>
             </div>
         </form>
     </div>

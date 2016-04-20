@@ -27,14 +27,23 @@
     };
 
     // App initializer
-    function initialize(rootScope, state) {
-return;
+    function initialize(rootScope, state, auth) {
+
+        // check if user session is active
+        var userSession = auth.checkSession();
+
+        // if session available
+        if (userSession && userSession._id) {
+            rootScope.curUser = userSession;
+        }
+
         // on route change start
         rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
 
             // not available to guest user
             if (toState.isPrivate && !rootScope.curUser) {
-                    event.preventDefault();
+
+                event.preventDefault();
 
                 // goto login
                 state.go("login");
@@ -55,5 +64,5 @@ return;
         .config(["$stateProvider", "$urlRouterProvider", appConfig])
 
         // initialize app
-        .run(["$rootScope", "$state", initialize]);
+        .run(["$rootScope", "$state", "auth", initialize]);
 } ());

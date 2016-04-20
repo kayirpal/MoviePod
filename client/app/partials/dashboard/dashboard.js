@@ -8,7 +8,8 @@
 
         var omdbUrl = "http://www.omdbapi.com/";
 
-        var curUser = {"_id":"571707dceae2a2c41f02f083","name":"kirpal","email":"kayirpal@gmail.com","password":"kirpal","__v":0,"movies":[{"imdbID":"tt0910970","rating":10,"_id":"571708ee95d82acc12bdaf95","timestamp":"2016-04-20T04:43:26.406Z","isWatched":true}]};
+        // cur user details
+        var curUser = rootScope.curUser;
 
         // movie filter
         dashboard.filter = {
@@ -16,6 +17,7 @@
             type: "movie"
         };
 
+        // search for movie
         function getMovie(queryUrl) {
 
             dashboard.curMovie = undefined;
@@ -65,6 +67,8 @@
         // search for movie
         dashboard.searchMovie = function (filter) {
 
+            dashboard.multipleMovies = false;
+
             // base url
             var url = omdbUrl.concat("?t=");
 
@@ -90,14 +94,39 @@
             }
 
         };
+        dashboard.nextMovie = function () {
+
+            var curMovieIndex,
+                nextMovieIndex,
+                curMovie = dashboard.curMovie,
+                nextMovieId;
+
+            var curUserMovies = curUser.movies || [];
+
+            if (curMovie && curUserMovies.length > 1) {
+
+                curMovieIndex = curUserMovies.findIndex(function (movie) { return movie.imdbID === curMovie.imdbID; });
+
+                curMovieIndex += 1;
+
+                nextMovieIndex = curMovieIndex === curUserMovies.length ? 0 : curMovieIndex;
+                
+                nextMovieId = curUserMovies[nextMovieIndex].imdbID;
+
+                // base url
+                var movieUrl = omdbUrl.concat("?i=", nextMovieId);
+
+                // get next movie
+                getMovie(movieUrl);
+            }
+        };
 
         // update movie watch status
         dashboard.updateUserMovie = function (movieDetails) {
 
-            var userMovies = curUser.movies || [],
-                isNew = true,
+            var isNew = true,
                 userId = curUser._id,
-                userMovie = userMovies.filter(function (movie) {
+                userMovie = curUser.movies.filter(function (movie) {
                     return movie.imdbID === movieDetails.imdbID;
                 });
 
@@ -117,7 +146,6 @@
                     imdbID: movieDetails.imdbID,
                 };
 
-                userMovies.push(userMovie);
             }
 
             // set flag and rating
@@ -130,7 +158,14 @@
 
                 // saved in DB, update view
                 if (reponse && reponse.ok) {
+
                     movieDetails.isWatched = userMovie.isWatched;
+
+                    if (isNew) {
+                        curUser.movies.push(userMovie);
+                    }
+
+                    dashboard.multipleMovies = curUser.movies.length > 1;
                 }
 
             }, function (error) {
@@ -141,28 +176,54 @@
         dashboard.updateRatings = function (newRating) {
 
             var movieDetails = dashboard.curMovie;
-            
+
             // update ratings
             movieDetails.rating = newRating;
             movieDetails.isWatched = !movieDetails.isWatched;
-            
+
             dashboard.updateUserMovie(movieDetails);
         };
 
         // init
         (function () {
 
+            dashboard.searchingMovie = true;
 
-            // base url
-            var walleUrl = omdbUrl.concat("?i=tt0910970");
+            // set base url
+            userMovieService.setBaseUrl(curUser);
 
-            // get default movie details (Wall-E)
-            getMovie(walleUrl);
-            
-            
+            // get updated user movies
+            userMovieService.get().then(function (movies) {
+
+                var firstMovieId;
+
+                curUser.movies = movies || [];
+
+                if (curUser.movies.length) {
+
+                    // 
+                    firstMovieId = curUser.movies[0].imdbID;
+
+                    dashboard.multipleMovies = curUser.movies.length > 1;
+
+                } else {
+
+                    // default first movie, Wall-E 
+                    firstMovieId = "tt0910970";
+                }
+
+                // base url
+                var movieUrl = omdbUrl.concat("?i=", firstMovieId);
+
+                // get default movie details (Wall-E)
+                getMovie(movieUrl);
+
+            }, function (error) {
+
+                console.log(error);
+            });
 
         } ());
-
     }
 
     // define partials module

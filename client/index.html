@@ -21,7 +21,13 @@
     <script src="scripts/AngularUI/ui-router.js"></script>
 
 </head>
-<body ng-app="app" ng-controller="AppController as root">
+<body ng-app="app" ng-class="{'unauthorizedUser' : !curUser}" ng-controller="AppController as main">
+    
+    <aside class="showUserActions">
+        <header ng-click="main.logout()">
+            <span class="fa fa-sign-out fa-2x"></span>
+        </header>       
+    </aside>
 
     <!-- App entry point-->
     <div class="appWrapper" ui-view></div>

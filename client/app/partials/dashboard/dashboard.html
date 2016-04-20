@@ -35,7 +35,7 @@
             <span class="fa fa-spinner fa-spin fa-6x"></span>
         </div>
 
-        <div class="searchedMovieWrapper" ng-if="!dashboard.searchingMovie">
+        <div class="searchedMovieWrapper" ng-if="!dashboard.searchingMovie && !!dashboard.curMovie">
 
             <article class="movieContainer" ng-repeat="movie in [dashboard.curMovie]">
                 <header class="movieHeader clear">
@@ -103,6 +103,8 @@
                     </ul>
                 </div>
             </article>
+
+            <span class="nextMovieButtonWrapper hvr-icon-wobble-horizontal" ng-if="dashboard.multipleMovies" ng-click="dashboard.nextMovie()"></span>
 
         </div>
 

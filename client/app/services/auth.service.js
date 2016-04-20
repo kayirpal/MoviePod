@@ -5,6 +5,7 @@
     function Service(api) {
 
         var auth = this,
+            sessionKey = "SESSION_KEY",
             serviceEndpoint = "users/";
 
         // Get user
@@ -22,11 +23,60 @@
 
             // set auth end point 
             var authEndpoint = serviceEndpoint.concat("authorize/");
-            
+
             // make api call
             return api.post(authEndpoint, userData);
         };
 
+        // start session
+        auth.startSession = function (user) {
+
+            // if user details
+            if (user && user._id) {
+
+                // details to be saved
+                var userDetails = JSON.stringify(user);
+
+                // if storage available
+                if (Storage && localStorage) {
+
+                    // save details
+                    localStorage.setItem(sessionKey, userDetails);
+                }
+            }
+        };
+
+        // get user session
+        auth.checkSession = function () {
+
+            // details to be saved
+            var userDetails;
+
+            // if storage available
+            if (Storage && localStorage) {
+
+                // get details
+                userDetails = localStorage.getItem(sessionKey);
+
+                // parse user details
+                try {
+                    return JSON.parse(userDetails);
+                } catch (ex) {
+                    console.log(userDetails);
+                }
+            }
+        };
+
+        // logout user
+        auth.logout = function () {
+
+            // if storage available
+            if (Storage && localStorage) {
+
+                // save details
+                localStorage.removeItem(sessionKey);
+            }
+        };
     }
 
     // define services module

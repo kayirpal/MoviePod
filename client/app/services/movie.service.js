@@ -6,12 +6,15 @@
 
         var usermovie = this;
 
-        var userUrl = "users/";
+        var baseMovieUrl;
 
-        // TODO: get it from auth service
-        var userId = "571707dceae2a2c41f02f083";
-
-        var baseMovieUrl = userUrl.concat(userId, "/movies/");
+        // set base url
+        usermovie.setBaseUrl = function (userDetails) {
+            
+            if(userDetails && userDetails._id){
+                baseMovieUrl = "users/".concat(userDetails._id, "/movies/");
+            }            
+        };
 
         // get all user movie
         usermovie.get = function (imdbID) {
