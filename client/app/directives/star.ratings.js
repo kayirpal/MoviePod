@@ -18,7 +18,7 @@
             link: function (scope, element, attr) {
 
                 // get maximum value
-                var max = Number(attr.max || 5);
+                var max = Number(attr.max || 10);
 
                 var diff;
 
@@ -26,10 +26,10 @@
                 var score = Number(attr.score || 0);
 
                 // score out of 5
-                score = (score / max) * 5;
+                score = (score / max) * 10;
 
-                // if score is more than 5
-                if (score > 5) {
+                // if score is more than 10
+                if (score > 10) {
                     score = 0;
                 } else {
                     // get nearest integer                     
@@ -37,7 +37,7 @@
                 }
 
                 // add stars
-                for (max = 1; max <= 5; max++) {
+                for (max = 1; max <= 10; max++) {
 
                     // score difference
                     diff = score - max;

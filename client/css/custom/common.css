@@ -93,3 +93,18 @@
 .clear{
     clear: both;
 }
+.display-inline-block{
+    display: inline-block;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.fa-6x{
+    font-size: 6em;
+}
+
+.fa-star {
+    color: rgba(228, 222, 38, 0.88);
+}

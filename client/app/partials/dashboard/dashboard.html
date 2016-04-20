@@ -1,34 +1,43 @@
 <section class="viewWrapper">
     <header class="viewHeader filterWrapper">
-        <ul class="filterContainer">
+        <ul class="filterContainer" ng-repeat="filter in [dashboard.filter]">
             <li class="filter searchFilter input-group">
-                <input type="search" class="form-control" placeholder="Search for title">
-                <div class="input-group-addon">
+                <form>
+                    <input type="search" class="form-control" placeholder="search for title" ng-model="filter.title" ng-model-options="{'updateOn': 'blur'}"
+                        ng-change="dashboard.searchMovie(filter)" />
+                </form>
+                <div class="input-group-addon pointer">
                     <span class="fa fa-search"></span>
                 </div>
 
             </li>
             <li class="filter typeFilter">
-                <select class="form-control">
+                <select class="form-control" ng-model="filter.type" ng-change="dashboard.searchMovie(filter)">
                     <option value="movie">Movie</option>
                     <option value="series">Series</option>
                     <option value="episode">Episode</option>
                 </select>
             </li>
             <li class="filter releaseYearFilter">
-                <input type="search" class="form-control" placeholder="Year of release">
+                <form>
+                    <input type="search" class="form-control" ng-model="filter.releaseYear" ng-model-options="{'updateOn': 'blur'}" ng-change="dashboard.searchMovie(filter)"
+                        placeholder="Year of release">
+                </form>
             </li>
         </ul>
     </header>
     <div class="viewContainer gridContainer">
 
-        <div ng-if="!dashboard.curMovie" class="searchForMovie center fa-2x">
+        <div ng-if="!dashboard.curMovie && !dashboard.searchingMovie" class="searchForMovie center fa-2x">
             Search for a movie
         </div>
+        <div ng-if="dashboard.searchingMovie" class="center">
+            <span class="fa fa-spinner fa-spin fa-6x"></span>
+        </div>
 
-        <div class="searchedMovieWrapper" ng-repeat="movie in [dashboard.curMovie]">
+        <div class="searchedMovieWrapper" ng-if="!dashboard.searchingMovie">
 
-            <article class="movieContainer">
+            <article class="movieContainer" ng-repeat="movie in [dashboard.curMovie]">
                 <header class="movieHeader clear">
                     <div class="movieTitle float-left">
                         <h3>
@@ -40,14 +49,10 @@
                     </h4>
                     </div>
                     <div class="usersMovieInfo float-right">
-                        <p ng-if="movie.alreadySeen">
-                            <span class="fa fa-3x fa-eye-slash"></span>
-                        </p>
-                        <ul ng-if="!movie.alreadySeen">
-                            
-                            <li class="fa fa-3x fa-eye"></li>
-                            <li on-update="dashboard.updateRatings" star-rating score="3" max="5"></li>
-                        </p>
+                        <ul ng-class="{'user-ratings': movie.userRatings}">
+                            <li class="fa fa-3x pointer" ng-click="dashboard.updateUserMovie(movie)" ng-class="movie.isWatched?'fa-eye':'fa-eye-slash'"></li>
+                            <li ng-if="movie.isWatched" on-update="dashboard.updateRatings" star-rating score="{{movie.rating}}" max="10"></li>
+                        </ul>
                     </div>
                 </header>
                 <div class="movieInfoWrapper clear">

@@ -28,12 +28,13 @@
 
     // App initializer
     function initialize(rootScope, state) {
-
+return;
         // on route change start
         rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
 
             // not available to guest user
-            if (toState.isPrivate && !rootScope.user) {
+            if (toState.isPrivate && !rootScope.curUser) {
+                    event.preventDefault();
 
                 // goto login
                 state.go("login");

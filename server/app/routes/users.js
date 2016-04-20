@@ -106,5 +106,105 @@ router.post("/authorize", function (req, res) {
     });
 });
 
+
+// get all user movies
+router.get("/:_id/movies", function (req, res) {
+
+    // get user id
+    var _id = req.params._id;
+
+    users.getUserMovies(_id, function (error, movies) {
+
+        if (error) {
+            console.log("Some error occured");
+        } else {
+            res.json(movies);
+        }
+    });
+
+});
+
+// get single user movie
+router.get("/:_id/movies/:imdbID", function (req, res) {
+
+    // get id
+    var _id = req.params._id;
+    
+    // get IMDB id
+    var imdbID = req.params.imdbID;
+
+    // get current user
+    users.getUserMovie(_id, imdbID, function (error, movie) {
+
+        if (error) {
+            console.log("Some error occured");
+        } else {
+            res.json(movie);
+        }
+    });
+
+});
+
+// add user movie        
+router.post("/:_id/movies", function (req, res) {
+
+    // get id
+    var _id = req.params._id;
+
+    // get new user details
+    var curMovie = req.body;
+
+    // update user
+    users.addUserMovie(_id, curMovie, function (error, movie) {
+
+        if (error) {
+            console.log("Some error occured");
+        } else {
+            res.json(movie);
+        }
+    });
+});
+
+// update user movie        
+router.put("/:_id/movies/:imdbID", function (req, res) {
+
+    // get id
+    var _id = req.params._id;
+    
+    // get IMDB id
+    var imdbID = req.params.imdbID;
+    
+    // get new user details
+    var curMovie = req.body;
+
+    // update user
+    users.updateMovie(_id, imdbID, curMovie, function (error, movie) {
+
+        if (error) {
+            console.log("Some error occured");
+        } else {
+            res.json(movie);
+        }
+    });
+});
+
+// delete user
+router.delete("/:_id/movies/:imdbID", function (req, res) {
+
+    // get id
+    var _id = req.params._id;
+
+    // update user
+    users.deleteMovie(_id, function (error, movie) {
+
+        if (error) {
+            console.log("Some error occured");
+        } else {
+            res.json(movie);
+        }
+    });
+});
+
+
 // export user routes
 module.exports = router;

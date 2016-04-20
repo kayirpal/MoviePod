@@ -14,8 +14,12 @@
             // create a deferred object to return 
             var deferred = $q.defer();
 
+            if (url.search("http://") !== 0 && url.search("https://") !== 0) {
+                url = baseUrl.concat(url);
+            }
+
             var requestData = {
-                url: baseUrl.concat(url),
+                url: url,
                 type: method
             };
 
@@ -42,10 +46,10 @@
 
         // get all or one
         api.get = function (source, id) {
-            
+
             // update source url
-            var url = source.concat(id||"");
-            
+            var url = source.concat(id || "");
+
             return ajax("GET", url);
         };
 
@@ -56,19 +60,19 @@
 
         // update 
         api.put = function (source, id, data) {
-         
+
             // update source url
             var url = source.concat(id);
-            
+
             return ajax("PUT", url, data);
         };
 
         // delete 
         api.delete = function (source, id) {
-           
+
             // update source url
             var url = source.concat(id);
-            
+
             return ajax("DELETE", url);
         };
 
@@ -79,5 +83,5 @@
 
         // attach service to module
         .service("api", ["$q", Service]);
-        
+
 } ());
