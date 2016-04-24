@@ -9,6 +9,9 @@ router.get("/", function (req, res) {
     users.getUsers(function (err, userList) {
         if (err) {
 
+            res.status(500);
+            res.render('error', { error: err });
+
         } else {
             res.json(userList);
         }
@@ -26,7 +29,9 @@ router.get("/:_id", function (req, res) {
     users.getUser(_id, function (error, user) {
 
         if (error) {
-            console.log("Some error occured");
+
+            res.status(500);
+            res.render('error', { error: error });
         } else {
             res.json(user);
         }
@@ -41,9 +46,9 @@ router.post("/", function (req, res) {
     users.addUser(newUser, function (error, user) {
 
         if (error) {
-            res.statusCode = 500;
-            res.statusMessage = error.message;
-            res.end();
+
+            res.status(500);
+            res.render('error', { error: error });
         } else {
             res.json(user);
         }
@@ -64,7 +69,9 @@ router.put("/:_id", function (req, res) {
     users.updateUser(_id, curUser, {}, function (error, user) {
 
         if (error) {
-            console.log("Some error occured");
+
+            res.status(500);
+            res.render('error', { error: error });
         } else {
             res.json(user);
         }
@@ -82,7 +89,9 @@ router.delete("/:_id", function (req, res) {
     users.deleteUser(_id, function (error, user) {
 
         if (error) {
-            console.log("Some error occured");
+
+            res.status(500);
+            res.render('error', { error: error });
         } else {
             res.json(user);
         }
@@ -97,9 +106,9 @@ router.post("/authorize", function (req, res) {
     users.authorize(userData, function (error, user) {
 
         if (error) {
-            res.statusCode = 500;
-            res.statusMessage = error.message;
-            res.end();
+
+            res.status(500);
+            res.render('error', { error: error });
         } else {
             res.json(user);
         }
@@ -116,7 +125,9 @@ router.get("/:_id/movies", function (req, res) {
     users.getUserMovies(_id, function (error, movies) {
 
         if (error) {
-            console.log("Some error occured");
+
+            res.status(500);
+            res.render('error', { error: error });
         } else {
             res.json(movies);
         }
@@ -129,7 +140,7 @@ router.get("/:_id/movies/:imdbID", function (req, res) {
 
     // get id
     var _id = req.params._id;
-    
+
     // get IMDB id
     var imdbID = req.params.imdbID;
 
@@ -137,7 +148,9 @@ router.get("/:_id/movies/:imdbID", function (req, res) {
     users.getUserMovie(_id, imdbID, function (error, movie) {
 
         if (error) {
-            console.log("Some error occured");
+
+            res.status(500);
+            res.render('error', { error: error });
         } else {
             res.json(movie);
         }
@@ -158,7 +171,9 @@ router.post("/:_id/movies", function (req, res) {
     users.addUserMovie(_id, curMovie, function (error, movie) {
 
         if (error) {
-            console.log("Some error occured");
+
+            res.status(500);
+            res.render('error', { error: error });
         } else {
             res.json(movie);
         }
@@ -170,10 +185,10 @@ router.put("/:_id/movies/:imdbID", function (req, res) {
 
     // get id
     var _id = req.params._id;
-    
+
     // get IMDB id
     var imdbID = req.params.imdbID;
-    
+
     // get new user details
     var curMovie = req.body;
 
@@ -181,7 +196,9 @@ router.put("/:_id/movies/:imdbID", function (req, res) {
     users.updateMovie(_id, imdbID, curMovie, function (error, movie) {
 
         if (error) {
-            console.log("Some error occured");
+
+            res.status(500);
+            res.render('error', { error: error });
         } else {
             res.json(movie);
         }
@@ -198,7 +215,9 @@ router.delete("/:_id/movies/:imdbID", function (req, res) {
     users.deleteMovie(_id, function (error, movie) {
 
         if (error) {
-            console.log("Some error occured");
+
+            res.status(500);
+            res.render('error', { error: error });
         } else {
             res.json(movie);
         }
