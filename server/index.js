@@ -31,6 +31,11 @@ var mongodb_connection_string = 'mongodb://kirpal:mongo1191919@127.0.0.1:27017/'
 mongoose.connect(mongodb_connection_string);
 
 var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+                
+                db.once('open', function callback() {
+                    console.log('db connection open');
+                });
 
 // router
 var router = express.Router();
