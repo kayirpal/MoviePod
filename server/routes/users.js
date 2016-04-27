@@ -6,6 +6,7 @@ var users = require("../models/users");
 
 // get users
 router.get("/", function (req, res) {
+                    console.log('get users');
     users.getUsers(function (err, userList) {
         if (err) {
 
@@ -24,6 +25,7 @@ router.get("/:_id", function (req, res) {
 
     // get id
     var _id = req.params._id;
+                    console.log('get user' +_id );
 
     // get current user
     users.getUser(_id, function (error, user) {
@@ -40,6 +42,7 @@ router.get("/:_id", function (req, res) {
 
 // add user
 router.post("/", function (req, res) {
+                    console.log('insert users');
 
     var newUser = req.body;
 
@@ -64,6 +67,7 @@ router.put("/:_id", function (req, res) {
 
     // get new user details
     var curUser = req.body;
+                    console.log('set user'+ _id);
 
     // update user
     users.updateUser(_id, curUser, {}, function (error, user) {
@@ -85,6 +89,7 @@ router.delete("/:_id", function (req, res) {
     // get id
     var _id = req.params._id;
 
+                    console.log('delete user'+ _id);
     // update user
     users.deleteUser(_id, function (error, user) {
 
