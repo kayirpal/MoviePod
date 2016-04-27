@@ -10,6 +10,7 @@ router.get("/", function (req, res) {
     users.getUsers(function (err, userList) {
         if (err) {
 
+                    console.log(err);
             res.status(500);
             res.render('error', { error: err });
 
