@@ -26,7 +26,7 @@ var mongoose = require("mongoose");
 var db_name = "moviePod";
 
 //provide a sensible default for local development
-var mongodb_connection_string = 'mongodb://kirpal:mongo1191919@127.0.0.1:27017/' + db_name;
+var mongodb_connection_string = 'mongodb://kirpal:mongo1191919@ec2-54-172-66-161.compute-1.amazonaws.com:27017/' + db_name;
 
 mongoose.connect(mongodb_connection_string);
 
