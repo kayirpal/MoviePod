@@ -1,6 +1,3 @@
-// server details
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 // get express
 var express = require("express");
@@ -29,12 +26,7 @@ var mongoose = require("mongoose");
 var db_name = "moviePod";
 
 //provide a sensible default for local development
-var mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + db_name;
-
-//take advantage of openshift env vars when available:
-if(process.env.OPENSHIFT_MONGODB_DB_URL){
-  mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
-}
+var mongodb_connection_string = 'mongodb://kirpal:mongo1191919@127.0.0.1:27017/' + db_name;
 
 mongoose.connect(mongodb_connection_string);
 
@@ -61,5 +53,4 @@ app.use('/api/users', users);
 app.use('/', router);
 
 // host server to port
-app.listen(server_port || 8888);
-
+app.listen(8888);
