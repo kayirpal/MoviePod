@@ -5,7 +5,7 @@
     function Service($q) {
 
         var api = this,
-            baseUrl = "http://localhost:8888/api/";
+            baseUrl = "http://ec2-54-172-66-161.compute-1.amazonaws.com:8888/api/";
 
 
         // request generator
