@@ -11,8 +11,7 @@ router.get("/", function (req, res) {
         if (err) {
 
                     console.log(err);
-            res.status(500);
-            res.render('error', { error: err });
+            res.json([]);
 
         } else {
             res.json(userList);
@@ -34,7 +33,7 @@ router.get("/:_id", function (req, res) {
         if (error) {
 
             res.status(500);
-            res.render('error', { error: error });
+            res.json([]);
         } else {
             res.json(user);
         }
@@ -51,8 +50,8 @@ router.post("/", function (req, res) {
 
         if (error) {
 
-            res.status(500);
                     console.log(error);
+            res.json({});
         } else {
             res.json(user);
         }
@@ -75,8 +74,8 @@ router.put("/:_id", function (req, res) {
 
         if (error) {
 
-            res.status(500);
-            res.render('error', { error: error });
+                    console.log(error);
+            res.json({});
         } else {
             res.json(user);
         }
@@ -96,8 +95,8 @@ router.delete("/:_id", function (req, res) {
 
         if (error) {
 
-            res.status(500);
-            res.render('error', { error: error });
+                    console.log(error);
+            res.json({});
         } else {
             res.json(user);
         }
@@ -113,8 +112,8 @@ router.post("/authorize", function (req, res) {
 
         if (error) {
 
-            res.status(500);
-            res.render('error', { error: error });
+                    console.log(error);
+            res.json({});
         } else {
             res.json(user);
         }
@@ -132,8 +131,8 @@ router.get("/:_id/movies", function (req, res) {
 
         if (error) {
 
-            res.status(500);
-            res.render('error', { error: error });
+                    console.log(error);
+            res.json([]);
         } else {
             res.json(movies);
         }
@@ -155,8 +154,8 @@ router.get("/:_id/movies/:imdbID", function (req, res) {
 
         if (error) {
 
-            res.status(500);
-            res.render('error', { error: error });
+                    console.log(error);
+            res.json({});
         } else {
             res.json(movie);
         }
@@ -178,8 +177,8 @@ router.post("/:_id/movies", function (req, res) {
 
         if (error) {
 
-            res.status(500);
-            res.render('error', { error: error });
+                    console.log(error);
+            res.json({});
         } else {
             res.json(movie);
         }
@@ -203,8 +202,8 @@ router.put("/:_id/movies/:imdbID", function (req, res) {
 
         if (error) {
 
-            res.status(500);
-            res.render('error', { error: error });
+                    console.log(error);
+            res.json({});
         } else {
             res.json(movie);
         }
@@ -222,8 +221,8 @@ router.delete("/:_id/movies/:imdbID", function (req, res) {
 
         if (error) {
 
-            res.status(500);
-            res.render('error', { error: error });
+                    console.log(error);
+            res.json({});
         } else {
             res.json(movie);
         }
